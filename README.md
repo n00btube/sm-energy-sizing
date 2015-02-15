@@ -5,7 +5,9 @@ Metroid.
 
 Uses free space in bank 84, since it has to add code to the tanks’ PLMs.
 
-## Single Tank
+# Patches
+
+## Single Tank Increase at Pickup
 
 Instead of a complete refill, regular energy tank pickups only add one tank
 worth to Samus’s current energy.
@@ -15,7 +17,7 @@ $84:8972 ($20972 file offset, unheadered.)
 
 Uses free space at FFF0.
 
-## Reserves with Energy
+## Full Reserve Tanks
 
 Instead of being completely empty, reserve tanks come with exactly one reserve
 tank worth of energy.
