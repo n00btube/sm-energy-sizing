@@ -24,6 +24,18 @@ tank worth of energy.
 
 Uses free space at FFE0.
 
+# Applying
+
+I keep forgetting how to xkas, so just to remind myself…
+
+For xkas 06:
+
+    xkas patchfile.asm unheadered.sfc
+
+For xkas 14:
+
+    xkas -o unheadered.sfc patchfile.asm [more asms...]
+
 # Author
 
 [Adam](https://github.com/n00btube) standing on the shoulders of Kejardon,
