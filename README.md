@@ -22,6 +22,11 @@ tank worth of energy.
 
 Uses free space at FFE0.
 
+# Author
+
+[Adam](https://github.com/n00btube) standing on the shoulders of Kejardon,
+and anyone who wrote patches in asm format for xkas.
+
 # License
 
 MIT.  If it breaks, you get to keep the pieces.
