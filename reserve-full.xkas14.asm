@@ -16,8 +16,6 @@ lorom
 // JSR are 3 bytes so that everything lines up perfectly.
 
 // Address of existing instruction (part of the block starting at 84:8968)
-// I guess if you wanted empty e-tanks, you could write EA EA EA in here to
-// replace the STA with NOPs, and you don't need ASM at all for that.
 org $84898D
 JSR hijack_reserve
 
