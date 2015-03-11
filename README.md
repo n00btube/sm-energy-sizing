@@ -12,17 +12,18 @@ Uses free space in bank 84, since it has to add code to the tanks’ PLMs.
 Instead of a complete refill, regular energy tank pickups only add one tank
 worth to Samus’s current energy.
 
-If you want energy tanks to grant **zero** energy, you can write `EA EA EA` at
-$84:8972 ($20972 file offset, unheadered.)
+This patch uses free space at FFF0.
 
-Uses free space at FFF0.
+If you want energy tanks to grant **zero** energy, you can replace `C2 09`
+with `06 0A` at $84:8973 ($20973 file offset, unheadered.)  That’s a hex tweak
+for which you don’t even need a patch, actually.
 
 ## Full Reserve Tanks
 
 Instead of being completely empty, reserve tanks come with exactly one reserve
 tank worth of energy.
 
-Uses free space at FFE0.
+This patch uses free space at FFE0.
 
 # Applying
 
@@ -40,6 +41,9 @@ For xkas 14:
 
 [Adam](https://github.com/n00btube) standing on the shoulders of Kejardon,
 and anyone who wrote patches in asm format for xkas.
+
+It turns out that the ‘single tank increase’ patch duplicates a patch by
+Crashtour99.  Oops, I should check metconst before writing things.
 
 # License
 
