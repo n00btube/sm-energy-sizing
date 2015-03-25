@@ -53,6 +53,9 @@ For xkas 14:
 
     xkas -o unheadered.sfc patchfile.asm [more asms...]
 
+Although I don’t use that myself, so I got rid of the xkas14 patches in here.
+I don’t want to break things inadvertently.
+
 # Author
 
 [Adam](https://github.com/n00btube) standing on the shoulders of Kejardon,
