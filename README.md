@@ -5,25 +5,41 @@ Metroid.
 
 Uses free space in bank 84, since it has to add code to the tanks’ PLMs.
 
+# Bonus Hex Tweak
+
+## No current energy gained at pickup
+
+    20973 - C2 09 to 06 0A
+
+(All numbers in hex for an unheadered ROM.)
+
+It stores Samus’ max energy to the current-energy _mirror,_ leaving actual current energy unchanged.
+The HUD routine then sees “energy differs from the mirror,” and updates the display.
+
+Samus still gets the capacity increase, but that’s it.
+
 # Patches
 
 ## Single Tank Increase at Pickup
 
-Instead of a complete refill, regular energy tank pickups only add one tank
-worth to Samus’s current energy.
+Instead of a complete refill, regular energy tank pickups only add one tank worth to Samus’s current energy.
 
-This patch uses free space at FFF0.
-
-If you want energy tanks to grant **zero** energy, you can replace `C2 09`
-with `06 0A` at $84:8973 ($20973 file offset, unheadered.)  That’s a hex tweak
-for which you don’t even need a patch, actually.
+This patch is named `single-tank` and uses free space at $84:FFF0.
 
 ## Full Reserve Tanks
 
-Instead of being completely empty, reserve tanks come with exactly one reserve
-tank worth of energy.
+Instead of being completely empty, reserve tanks come with exactly one reserve tank worth of energy.
+If she has 0/200 reserve and collects a tank, she’ll have 100/300 reserve afterward.
 
-This patch uses free space at FFE0.
+This patch is named `reserve-full` and uses free space at $84:FFE0.
+
+## All-filling Reserve Tanks
+
+At pickup, reserve tanks completely fill Samus’ reserves.
+If she has 0/200 reserve and happens on a tank, she’ll have 300/300 reserve afterward.
+
+This patch is named `reserve-all` and uses free space at $84:FFE0.
+Which is okay, because you can’t use reserve-full _and_ reserve-all at once.
 
 # Applying
 
