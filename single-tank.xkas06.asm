@@ -1,4 +1,6 @@
 ; By [n00btube](https://github.com/n00btube) aka Adam, February 2015.
+; MIT license.
+; There _may_ be a newer version on the GitHub.
 
 lorom
 
