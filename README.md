@@ -11,12 +11,12 @@ Uses free space in bank 84, since it has to add code to the tanks’ PLMs.
 
     20973 - C2 09 to 06 0A
 
-(All numbers in hex for an unheadered ROM.)
+(All numbers in hex, for an unheadered ROM.)
 
 It stores Samus’ max energy to the current-energy _mirror,_ leaving actual current energy unchanged.
 The HUD routine then sees “energy differs from the mirror,” and updates the display.
 
-Samus still gets the capacity increase, but that’s it.
+Samus still gets the capacity increase, but that’s it.  No free energy.
 
 # Patches
 
@@ -26,20 +26,20 @@ Instead of a complete refill, regular energy tank pickups only add one tank wort
 
 This patch is named `single-tank` and uses free space at $84:FFF0.
 
-## Full Reserve Tanks
+## Reserve Tanks Aren’t Empty at Pickup
 
-Instead of being completely empty, reserve tanks come with exactly one reserve tank worth of energy.
-If she has 0/200 reserve and collects a tank, she’ll have 100/300 reserve afterward.
+There are two options rolled into this patch.
+In both cases, nstead of reserve tanks being completely empty, they will contain energy.
+The only question is, how much?
 
-This patch is named `reserve-full` and uses free space at $84:FFE0.
+1. Default: reserve tanks have exactly one tank of energy in them.
+If Samus has 25 of 200 reserve and collects a tank, she’ll have 125 of 300 reserve afterward.
+Just like how regular E-tanks work with the `single-tank` patch.
+2. Optional mod (see asm file for instructions): reserve tanks completely fill reserve energy.
+If Samus has 25 of 200 reserve and collects a tank, she’ll have 300 of 300 reserve afterward.
+Just like how regular E-tanks work in the original game.
 
-## All-filling Reserve Tanks
-
-At pickup, reserve tanks completely fill Samus’ reserves.
-If she has 0/200 reserve and happens on a tank, she’ll have 300/300 reserve afterward.
-
-This patch is named `reserve-all` and uses free space at $84:FFE0.
-Which is okay, because you can’t use reserve-full _and_ reserve-all at once.
+This patch is named `reserve` and uses free space at $84:FFE0.
 
 # Applying
 
