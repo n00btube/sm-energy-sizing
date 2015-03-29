@@ -1,3 +1,8 @@
+# 2015-03-28: v3
+
+* Patch generator added.
+* Generator-only options: “Tanks fill ALL reserves+energy,” available independently for E-tanks and R-tanks.
+
 # 2015-03-25: v2
 
 * Renamed the reserve tank patch.
