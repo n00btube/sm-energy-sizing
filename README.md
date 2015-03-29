@@ -4,6 +4,22 @@ Changes to how much energy E-Tanks and Reserve Tanks grant at pickup in Super
 Metroid.
 
 Uses free space in bank 84, since it has to add code to the tanks’ PLMs.
+Designed for unheadered ROMs.
+
+# Patch Generator
+
+I got more ideas, and instead of spraying the repo with patches (or the patch files with options), I made you a program that generates patches.
+
+You’ll need Python for this to work.
+It’s _meant_ to work in Python 2.6+ but is only tested on Python 3.4.
+
+Run `patch-generator.py` and if everything went well, you’ll get two menus.
+One with a set of options for E-tank behavior, and one for reserve tanks.
+Then, an `energy-reserve-mods.asm` file is spit out into the current directory with exactly the combo of options you’ve chosen.
+
+Compared to the plain ASM files, there are new options for having each kind of tank refill _both_ kinds of energy.
+It’s not that it would be hard to mod the patch files;
+it’s that I didn’t want to write long-winded directions on how do that in each file.
 
 # Bonus Hex Tweak
 
@@ -17,6 +33,8 @@ It stores Samus’ max energy to the current-energy _mirror,_ leaving actual cur
 The HUD routine then sees “energy differs from the mirror,” and updates the display.
 
 Samus still gets the capacity increase, but that’s it.  No free energy.
+
+This hex tweak can now be incorporated in the patch generator’s output, too.
 
 # Patches
 
