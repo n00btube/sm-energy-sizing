@@ -1,3 +1,7 @@
+# 2015-04-18: v4
+
+* `reserve-size` patch added for changing the displayed size in the equipment screen.
+
 # 2015-03-28: v3
 
 * Patch generator added.

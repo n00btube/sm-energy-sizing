@@ -1,12 +1,13 @@
 # sm-energy-sizing
 
-Changes to how much energy E-Tanks and Reserve Tanks grant at pickup in Super
-Metroid.
+Changes to how much energy E-Tanks and Reserve Tanks add to Samus’ current
+levels when picked up in Super Metroid.  Also, a bonus patch changes the
+effective size of a reserve tank in the display.
 
 Uses free space in bank 84, since it has to add code to the tanks’ PLMs.
 Designed for unheadered ROMs.
 
-# Patch Generator
+# Patch Generator / Energy gains when picking up the items
 
 I got more ideas, and instead of spraying the repo with patches (or the patch files with options), I made you a program that generates patches.
 
@@ -21,9 +22,7 @@ Compared to the plain ASM files, there are new options for having each kind of t
 It’s not that it would be hard to mod the patch files;
 it’s that I didn’t want to write long-winded directions on how do that in each file.
 
-# Bonus Hex Tweak
-
-## No current energy gained at pickup
+## Bonus hex tweak: No current energy gained at pickup
 
     20973 - C2 09 to 06 0A
 
@@ -36,17 +35,15 @@ Samus still gets the capacity increase, but that’s it.  No free energy.
 
 This hex tweak can now be incorporated in the patch generator’s output, too.
 
-# Patches
-
-## Single Tank Increase at Pickup
+## Original patch: Single Tank Increase at Pickup
 
 Instead of a complete refill, regular energy tank pickups only add one tank worth to Samus’s current energy.
 
 This patch is named `single-tank` and uses free space at $84:FFF0.
 
-## Reserve Tanks Aren’t Empty at Pickup
+## Original patch: Reserve Tanks Aren’t Empty at Pickup
 
-There are two options rolled into this patch.
+There are two options rolled into this patch, named `reserve`.
 In both cases, nstead of reserve tanks being completely empty, they will contain energy.
 The only question is, how much?
 
@@ -58,6 +55,23 @@ If Samus has 25 of 200 reserve and collects a tank, she’ll have 300 of 300 res
 Just like how regular E-tanks work in the original game.
 
 This patch is named `reserve` and uses free space at $84:FFE0.
+
+# Reserve Tank Display Size
+
+This patch, `reserve-size`, changes the displayed size of reserve tanks in the
+equipment screen.  The original game draws 100 reserve energy == 1 box, and if
+you change the pickup amount in SMILE to something different, like 180, the
+display shows more than 1 tank when Samus has exceeded 100 reserve energy.
+Until Samus has more than 200 capacity, the display _won’t_ show the second
+tank outlined-but-empty while her current levels are 100 or less.
+
+With the display-size patch, the drawing is changed so that each block on the
+display contains a configurable amount of energy (see `!newsize` in the
+patch.)  It doesn’t fix any issues when the pickup value and tank size are
+mismatched, though.
+
+Some free space in bank $82 is used to separate division to find “number of
+tanks to draw” from the division to find the digits to display.
 
 # Applying
 
