@@ -1,3 +1,7 @@
+# 2015-04-19: v5
+
+* `reserve-heat` patch added for preventing heat damage during auto-refill.
+
 # 2015-04-18: v4
 
 * `reserve-size` patch added for changing the displayed size in the equipment screen.

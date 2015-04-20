@@ -73,6 +73,14 @@ mismatched, though.
 Some free space in bank $82 is used to separate division to find “number of
 tanks to draw” from the division to find the digits to display.
 
+# Reserve Tank Heat Damage Exception
+
+`reserve-heat` changes the heat damage code to avoid damaging Samus when the
+game is refilling her energy tanks with reserve energy.
+
+It doesn’t really make sense that the enemies would freeze, but heat damage
+wouldn’t.
+
 # Applying
 
 I keep forgetting how to xkas, so just to remind myself…
