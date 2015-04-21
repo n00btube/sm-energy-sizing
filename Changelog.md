@@ -1,3 +1,7 @@
+# 2015-04-20: v6
+
+* `reserve-heat` doesn’t use free space.
+
 # 2015-04-19: v5
 
 * `reserve-heat` patch added for preventing heat damage during auto-refill.

@@ -6,35 +6,17 @@ lorom
 
 ; While Samus is getting her reserve->main tank transfer, the game pauses, but
 ; heat damage still happens.  UNTIL NOW.
-; Seriously, if the enemies are frozen, why isn't heat frozen?
+; Seriously, if the enemies are frozen, and Samus is floating, why isn't heat
+; damage stopped?  Like it is when she's actively standing around XRaying?
 
 ; Main hijack point: heat-damage code.  Called from heat-glow code.
-; I didn't walk back up the call stack, maybe reserve-tank state ($0998=$1B)
-; could just skip calling heat-glow stuff instead of this minimal approach?
-org $8DE37C
-	JSR heat_exemption
-	BCC $2A ; change condition from BNE to something handier
+org $8DE381
+	; originally, these damage values get *added* to $0A4E/$0A50 and thus
+	; accumulate while reserve-fill is happening.  We change them to a store,
+	; so the reserve-fill happens on "one frame" as far as heat damage goes.
+	; In normal gamestate, heat damage is checked (+zeroed) every frame.
+	LDA #$4000 ; sub-health damage per frame = 1/4
+	STA $0A4E  ; store
+	STZ $0A50  ; whole-health damage per frame = 0
+	JMP $E394  ; skip to original code following what we just overwrote
 
-; This bank is full; this is the start of the free space... Oof.
-org $8DFFF0
-heat_exemption:
-	JSL real_heat_exemption
-	RTS
-
-; Free space we have room to work in (anywhere in the ROM, because JSL/RTL.)
-org $8CFFE0
-real_heat_exemption:
-	AND #$0021    ; varia/gravity check (change to 0001 for just varia)
-	BNE no_damage ; immune to damage
-
-	LDA $0998     ; game state
-	AND #$00FF    ; ignore $0999
-	CMP #$001B    ; auto reserve is transferring energy?
-	BEQ no_damage ; if so, don't accumulate env. damage
-
-	SEC
-	RTL
-
-no_damage:
-	CLC
-	RTL
